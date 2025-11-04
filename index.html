@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Sketch</title>
+    <!-- Load Tailwind CSS utilities from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for the GitHub icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link the custom styles for the Excalidraw aesthetic -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- Game Container - This holds all game elements -->
+    <div class="game-container">
+        
+        <h1 class="text-4xl sm:text-5xl font-bold text-center mb-4 straight-element">
+            TIC-TAC-SKETCH
+        </h1>
+
+        <!-- Status Display Area - Shows whose turn it is -->
+        <div id="status-display" class="text-xl sm:text-2xl text-center h-10 straight-element">
+            <!-- Initial Status will be set by script.js -->
+        </div>
+
+        <!-- The 3x3 Game Board -->
+        <div class="board straight-element" id="game-board">
+            <!-- The winning line element, positioned and styled by JavaScript -->
+            <div id="winning-line"></div> 
+            <!-- Cells (buttons) will be dynamically created by script.js -->
+        </div>
+
+        <!-- Controls: Restart and GitHub Button -->
+        <div class="flex justify-center mt-6 space-x-4">
+            <button id="reset-button" class="text-lg">
+                Restart Drawing
+            </button>
+            
+            <!-- GitHub Button: Link to your profile with the sketchy style -->
+            <a id="github-button" href="https://github.com/MrSyr3x" target="_blank" title="View on GitHub">
+                <!-- GitHub Icon from Font Awesome -->
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Custom Modal for Messages (Win/Tie) - Used instead of alert() -->
+    <div id="message-modal" class="message-modal">
+        <div class="modal-content">
+            <p id="modal-text" class="text-2xl font-bold mb-4"></p>
+            <button id="modal-close-button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 text-lg">
+                Got It, Restart
+            </button>
+        </div>
+    </div>
+
+    <!-- Link the game logic (must be placed at the end of the body) -->
+    <script src="script.js"></script>
+</body>
+</html>

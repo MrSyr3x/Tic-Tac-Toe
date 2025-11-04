@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+/* --- Excalidraw-Inspired Global Styles --- */
+body {
+    /* Set the 'Permanent Marker' font for a hand-drawn look */
+    font-family: 'Permanent Marker', cursive; 
+    background-color: #fffdf0; /* Light cream paper background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333333; /* Dark pencil/pen color */
+}
+
+/* The main game container with a sketchy border effect */
+.game-container {
+    background-color: #ffffff; /* White center panel */
+    padding: 2.5rem;
+    max-width: 95vw; /* Allow it to scale up to near full width on small screens */
+    width: 450px; /* Optimal desktop width */
+    /* Sketchy Shadow: simulates a thick, imperfect, hand-drawn border */
+    border: 2px solid #333;
+    box-shadow: 10px 10px 0 0 #333, -3px -3px 0 0 #333; 
+    transform: rotate(1deg); /* Slight rotation for a casual look */
+    transition: all 0.3s ease;
+    position: relative; 
+}
+
+/* Mobile Responsiveness for Game Container */
+@media (max-width: 500px) {
+    .game-container {
+        padding: 1.5rem; /* Reduced padding on small screens */
+        width: 100%; /* Take full width on small screens */
+        max-width: 380px; /* Keep a maximum width, but let it breathe */
+        transform: rotate(0.5deg); /* Slightly less rotation on tiny screens */
+    }
+}
+
+
+/* Reset the rotation for inner elements that need to be straight */
+.straight-element {
+    transform: rotate(-1deg);
+}
+
+/* Game Title */
+h1 {
+    text-shadow: 2px 2px 0 #f0f0f0; 
+}
+
+/* The main 3x3 grid container */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    position: relative; 
+    overflow: hidden; 
+}
+
+/* --- Winning Line Style (The final sketchy feature) --- */
+#winning-line {
+    position: absolute;
+    height: 5px; 
+    border-radius: 5px; 
+    display: none;
+    z-index: 10;
+    transform-origin: center center;
+    transition: all 0.3s ease-out;
+    background-color: transparent; 
+}
+.line-x {
+    /* Red dashed line effect */
+    background-image: linear-gradient(to right, #ef4444 50%, transparent 50%); 
+    background-size: 14px 5px; 
+}
+.line-o {
+    /* Blue dashed line effect */
+    background-image: linear-gradient(to right, #3b82f6 50%, transparent 50%); 
+    background-size: 14px 5px;
+}
+
+/* Styling for each individual game cell (button) */
+.cell {
+    background-color: transparent;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-size: 3.5rem;
+    font-weight: 400; 
+    color: #333;
+    width: 100%;
+    padding-bottom: 100%; /* Makes the cell a perfect square */
+    position: relative;
+    /* Irregular border-radius for a hand-drawn look */
+    border-radius: 5% 15% 10% 8% / 10% 5% 12% 7%;
+    box-shadow: 2px 2px 0 0 #333; 
+    transition: all 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0; 
+}
+/* Ensure cell font size scales down for small devices for better fit */
+@media (max-width: 400px) {
+    .cell {
+        font-size: 11vw; 
+    }
+}
+
+/* Hover effect for empty cells */
+.cell:not(:disabled):hover {
+    background-color: #ffe082; /* Light yellow background on hover */
+    transform: translate(-1px, -1px); /* Slight shift up-left */
+    box-shadow: 4px 4px 0 0 #333; /* Enhanced shadow for 'lifted' look */
+}
+
+/* The content wrapper that holds the X or O marker */
+.cell-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    /* Adjusts the font vertically for better centering in Permanent Marker */
+    transform: translateY(6px); 
+}
+
+/* Styling for Player X marker (Red) */
+.x-mark {
+    color: #ef4444; 
+    transform: translateY(6px) rotate(-2deg); /* Added slight rotation */
+}
+/* Styling for Player O marker (Blue) */
+.o-mark {
+    color: #3b82f6; 
+    transform: translateY(6px) rotate(2deg); /* Added slight rotation */
+}
+
+/* Winning cells highlight */
+.winning-cell {
+    background-color: #86efac !important; /* Light green highlight */
+    color: #052e16 !important;
+    animation: none;
+    box-shadow: 6px 6px 0 0 #10b981 !important;
+}
+
+/* --- Button Styles (Reset and GitHub) --- */
+/* Common button styling base */
+#reset-button, #github-button {
+    color: white;
+    font-weight: 400;
+    border: 2px solid #333;
+    /* Sketchy border radius */
+    border-radius: 10% 20% 5% 15% / 15% 5% 20% 10%; 
+    cursor: pointer;
+    box-shadow: 4px 4px 0 0 #333; 
+    transition: all 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* Restart Button Specific Styles */
+#reset-button {
+    background-color: #10b981; /* Green color for the button */
+    padding: 0.75rem 1.5rem;
+    transform: rotate(-1deg);
+}
+#reset-button:hover {
+    background-color: #059669;
+}
+
+/* GitHub Button Specific Styles */
+#github-button {
+    background-color: #333333; /* Dark color for GitHub */
+    /* Adjusted padding to make it a neat square icon button */
+    padding: 0.75rem; 
+    font-size: 1.5rem;
+    transform: rotate(2deg); /* Different rotation for visual interest */
+}
+#github-button:hover {
+    background-color: #1a1a1a;
+}
+
+/* Pressed state for both buttons */
+#reset-button:active, #github-button:active {
+    box-shadow: 1px 1px 0 0 #333;
+    /* Simulates pressing the button into the paper */
+    transform: translate(3px, 3px) rotate(0deg); 
+}
+
+
+/* --- Custom Modal Styles --- */
+.message-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none; /* Hidden by default, shown via JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border: 2px solid #333;
+    box-shadow: 8px 8px 0 0 #333; 
+    transform: rotate(-2deg);
+    text-align: center;
+    max-width: 90%; 
+    font-size: 1rem;
+}
+#modal-close-button {
+    background-color: #ef4444; /* Match red pen color */
+    /* Apply sketchy style to the modal button too */
+    border: 2px solid #333;
+    border-radius: 10% 20% 5% 15% / 15% 5% 20% 10%; 
+    box-shadow: 4px 4px 0 0 #333; 
+    transform: rotate(1deg);
+    transition: all 0.1s ease;
+}
