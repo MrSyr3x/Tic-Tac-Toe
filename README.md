@@ -5,6 +5,16 @@ Built using **HTML, CSS, and JavaScript**, this project mixes doodle art vibes w
 
 ---
 
+## 🖼️ Preview  
+![Tic Tac Toe Screenshot](./assets/Image.png)
+
+---
+
+## 🚀 Live Demo  
+🎮 **[Play Game](https://mrsyr3x.github.io/Tic-Tac-Toe/)**  
+
+---
+
 ## 💡 Highlights
 - ✏️ **Sketch-Style Interface** — looks hand-drawn and playful  
 - 🧩 **Two-Player Gameplay** — play locally with a friend  
